@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Verification.EntityModel\Verification.EntityModel.csproj" />
+    <ProjectReference Include="..\Verification.DomainModel\Verification.DomainModel.csproj" />
+    <ProjectReference Include="..\Verification.Tracker\Verification.Tracker.csproj" />
+  </ItemGroup>
+
+</Project>

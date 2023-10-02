@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dataBase>
+	<EfCore>
+		<script  ver="0.0" sync="1">
+			<sqlquery script="1">
+				if Not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='SqlVer')
+				begin
+				Create Table SqlVer(DateIs Datetime default GetDate() not null,VerActive nvarchar(100) not null,SyncScript nvarchar(100),QryScript nvarchar(100) not null);
+				end
+			</sqlquery>
+			<sqlquery script="2">
+				if Not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_ErrorLog')
+				begin
+				Create Table tbl_ErrorLog(Id int identity(1,1) not null,DateIs Datetime default GetDate() not null, Error varchar(max) not null);
+				end
+			</sqlquery>
+			<sqlquery script="3">
+				if exists(SELECT  * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='__EFMigrationsHistory')
+				begin
+				if not exists(SELECT  * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='__EFMigrationsHistory' and COLUMN_NAME='DateIs')
+				begin
+				alter Table __EFMigrationsHistory add DateIs Datetime default GetDate();
+				end
+				end
+			</sqlquery>
+
+		</script>
+		<script  ver="1.0" sync="2">
+			<sqlquery script="1">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_StateZone';
+				declare @colName varchar(500)='DATEIS';
+				declare @DeflCons varchar(100) = 'getdate()';
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+			<sqlquery script="2">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_StateZone';
+				declare @colName varchar(500)='IsActive';
+				declare @DeflCons bit=1;
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+		</script>
+		<script  ver="1.0" sync="3">
+			<sqlquery  script="1">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_State';
+				declare @colName varchar(500)='DATEIS';
+				declare @DeflCons varchar(100) = 'getdate()';
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+			<sqlquery  script="2">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_State';
+				declare @colName varchar(500)='IsActive';
+				declare @DeflCons bit=1;
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+		</script>
+		<script  ver="1.0" sync="4">
+			<sqlquery  script="1">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_AreaZone';
+				declare @colName varchar(500)='DATEIS';
+				declare @DeflCons varchar(100) = 'getdate()';
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+			<sqlquery  script="2">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_AreaZone';
+				declare @colName varchar(500)='IsActive';
+				declare @DeflCons bit=1;
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+		</script>
+		<script  ver="1.0" sync="5">
+			<sqlquery  script="1">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_Area';
+				declare @colName varchar(500)='DATEIS';
+				declare @DeflCons varchar(100) = 'getdate()';
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+			<sqlquery  script="2">
+				declare @consName varchar(500)='';
+				declare @tblName varchar(500)='tbl_Area';
+				declare @colName varchar(500)='IsActive';
+				declare @DeflCons bit=1;
+				select @consName = c.name  from sys.objects as a inner join sys.columns as b on a.object_id = b.object_id inner join sys.default_constraints as c on a.object_id = c.parent_object_id and b.default_object_id =c.object_id where a.type_desc='USER_TABLE' and a.name=@tblName and b.NAME=@colName;
+				if not @consName=''
+				begin
+				execute('alter table '+@tblName+' drop CONSTRAINT '+@consName);
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				else
+				begin
+				if exists (select top 1 * from sys.tables where name=@tblName)
+				begin
+				execute('alter table '+@tblName+' ADD CONSTRAINT '+@tblName+'_'+@colName+' DEFAULT '+@DeflCons+' FOR '+@colName);
+				end
+				end
+			</sqlquery>
+			<sqlquery  script="3">
+				--select name from sys.all_objects where type_desc='SQL_TRIGGER'
+				SET ANSI_NULLS ON
+				GO
+				SET QUOTED_IDENTIFIER ON
+				GO
+				CREATE TRIGGER [dbo].[Tgr_tbl_Area_VirPin]
+				ON  [dbo].[tbl_Area]
+				AFTER Insert
+				AS
+				declare @Id int = 0
+				declare @pinsno int = 0
+				declare @pinsno2 varchar(2) = '01'
+				declare @pincode varchar(6)='000000'
+				declare @stateId int = 0
+				declare @stateId2 varchar(2)='00'
+				declare @isExist int= 1
+				BEGIN TRY
+				BEGIN TRANSACTION
+				while(@isExist > 0)
+				begin
+				select top 1 @Id=Id, @pincode = pincode,@stateId=StateId from tbl_Area where Virpin is NULL
+				Select @pinsno=max(PinSno) from tbl_Area where Pincode=@pincode and StateId =@stateId
+
+				set @stateId2 = case when @StateId is null or len(@StateId)=0 then '00' when len(@stateid)=1 then '0'+convert(varchar(2),@StateId) else convert(varchar(2),@StateId) end
+
+				if @pinsno is null or @pinsno = 0
+				begin
+				Update tbl_Area set PinSno = 1 where Id=@Id
+				end
+				else
+				begin
+				set @pinsno2 = case when len(@pinsno)=1 then '0'+convert(varchar(2),@pinsno) else convert(varchar(2),@pinsno) end
+				Update tbl_Area set PinSno=(@pinsno+1)where  Id=@Id
+
+				end
+				Update tbl_Area set VirPin =  @stateId2+Pincode+@pinsno2 where  Id=@Id
+				--loop
+				select @isExist = count(Id) from tbl_Area where Virpin is NULL
+				end
+				COMMIT TRANSACTION
+				END TRY
+				BEGIN CATCH
+				ROLLBACK
+				END CATCH
+			</sqlquery>
+		</script>
+	</EfCore>
+
+	<sqlserver>
+		<script ver="0" sync="1">
+			<sqlquery ver="1">
+				if Not exists(SELECT top 1 * FROM master.dbo.sysdatabases where name='Ver1')
+				begin
+				use master;
+				create database Ver1;
+				end
+			</sqlquery>
+			<sqlquery ver="2">
+				if Not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='SqlVer')
+				begin
+				Create Table SqlVer(DateIs Datetime default GetDate() not null,VerActive nvarchar(100) not null,SyncScript nvarchar(100),QryScript nvarchar(100) not null);
+				end
+			</sqlquery>
+			<sqlquery ver="3">
+				if Not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_ErrorLog')
+				begin
+				Create Table tbl_ErrorLog(Id int identity(1,1) not null,DateIs Datetime default GetDate() not null, Error varchar(max) not null);
+				end
+			</sqlquery>
+		</script>
+		<script  ver="1" sync="1">
+			<sqlquery ver="1">
+				if not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_StateZone')
+				begin
+				Create Table tbl_StateZone(Id int identity(1,1) not null, IsActive bit not null, DateIs DateTime not null, Name varchar(100) not null);
+				ALTER TABLE tbl_StateZone ADD  CONSTRAINT PK_tbl_StateZone PRIMARY KEY(Id);
+				ALTER TABLE tbl_StateZone ADD  CONSTRAINT DF_tbl_StateZone_IsActive  DEFAULT ((1)) FOR IsActive;
+				ALTER TABLE tbl_StateZone ADD  CONSTRAINT DF_tbl_StateZone_DateIs  DEFAULT (getdate()) FOR DateIs;
+				end
+			</sqlquery>
+			<sqlquery ver="2">
+				if not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_State')
+				begin
+				Create Table tbl_State(Id int identity(1,1) not null, IsActive bit not null, DateIs DateTime not null, Name varchar(100) not null, StateZoneId int not null);
+				ALTER TABLE tbl_State ADD  CONSTRAINT PK_tbl_State PRIMARY KEY(Id);
+				ALTER TABLE tbl_State ADD  CONSTRAINT FK_tbl_State_PK_tbl_StateZone FOREIGN KEY(StateZoneId) REFERENCES tbl_StateZone(Id);
+				ALTER TABLE tbl_State ADD  CONSTRAINT DF_tbl_State_IsActive  DEFAULT ((1)) FOR IsActive;
+				ALTER TABLE tbl_State ADD  CONSTRAINT DF_tbl_State_DateIs  DEFAULT (getdate()) FOR DateIs;
+				end
+			</sqlquery>
+			<sqlquery ver="3">
+				if not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_AreaZone')
+				begin
+				Create Table tbl_AreaZone(Id int identity(1,1) not null, IsActive bit not null, DateIs DateTime not null, Name varchar(100) not null,StateId int not null);
+				ALTER TABLE tbl_AreaZone ADD  CONSTRAINT PK_tbl_AreaZone PRIMARY KEY(Id);
+				ALTER TABLE tbl_AreaZone ADD  CONSTRAINT FK_tbl_AreaZone_PK_tbl_State FOREIGN KEY(StateId) REFERENCES tbl_state(Id);
+				ALTER TABLE tbl_AreaZone ADD  CONSTRAINT DF_tbl_AreaZone_IsActive  DEFAULT ((1)) FOR IsActive;
+				ALTER TABLE tbl_AreaZone ADD  CONSTRAINT DF_tbl_AreaZone_DateIs  DEFAULT (getdate()) FOR DateIs;
+				end
+			</sqlquery>
+			<sqlquery ver="4">
+				if not exists(SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_Area')
+				begin
+				Create Table tbl_Area(Id int identity(1,1) not null, IsActive bit not null, DateIs DateTime not null, Name varchar(100) not null,Pincode varchar(6) not null,PinSno int not null default('0'),VirPin varchar(10) not null, AreaZoneId int not null);
+				ALTER TABLE tbl_Area ADD  CONSTRAINT PK_tbl_Area PRIMARY KEY(Id);
+				ALTER TABLE tbl_Area ADD  CONSTRAINT FK_tbl_Area_PK_tbl_AreaZone FOREIGN KEY(AreaZoneId) REFERENCES tbl_AreaZone(Id);
+				ALTER TABLE tbl_Area ADD  CONSTRAINT DF_tbl_Area_IsActive  DEFAULT ((1)) FOR IsActive;
+				ALTER TABLE tbl_Area ADD  CONSTRAINT DF_tbl_Area_DateIs  DEFAULT (getdate()) FOR DateIs;
+				end
+			</sqlquery>
+			<sqlquery ver="5">
+				if exists (SELECT top 1 * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'  AND TABLE_NAME='tbl_StateZone')
+				begin
+					Insert into tbl_StateZone(Name) Values('EAST'),('WEST'),('NORTH'),('SOUTH'),('CENTERAL'),('NORTH EAST');
+				End
+			</sqlquery>
+		</script>
+	</sqlserver>
+</dataBase>

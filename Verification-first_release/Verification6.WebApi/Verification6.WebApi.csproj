@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+	<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\Verification.Controller\Verification.Controller.csproj" />
+		<ProjectReference Include="..\Verification.Repository.EfCore\Verification.Repository.EfCore.csproj" />
+		<ProjectReference Include="..\Verification.Repository\Verification.Repository.csproj" />
+		<ProjectReference Include="..\Verification.SqlServer.Scripts\Verification.SqlServer.Scripts.csproj" />
+		<ProjectReference Include="..\Verification.Tracker\Verification.Tracker.csproj" />
+	</ItemGroup>
+	
+</Project>

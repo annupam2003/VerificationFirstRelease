@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Verification.Data.EfCore\Verification.Data.EfCore.csproj" />
+    <ProjectReference Include="..\Verification.EntityModel\Verification.EntityModel.csproj" />
+    <ProjectReference Include="..\Verification.DomainModel\Verification.DomainModel.csproj" />
+    <ProjectReference Include="..\Verification.Repository\Verification.Repository.csproj" />
+    <ProjectReference Include="..\Verification.Tracker\Verification.Tracker.csproj" />
+  </ItemGroup>
+
+</Project>

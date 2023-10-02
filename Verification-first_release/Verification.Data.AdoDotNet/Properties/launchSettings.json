@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Verification.Data.AdoDotNet": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56044;http://localhost:56045"
+    }
+  }
+}
